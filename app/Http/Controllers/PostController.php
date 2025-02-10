@@ -15,7 +15,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all()->map(function ($data) {
+        $posts = Post::where('user_id', Auth::id())->get()->map(function ($data) {
             $btnEdit = '<a class="btn btn-xs btn-default text-primary mx-1 shadow" href="'. route('post.edit',$data->id) .'" title="Edit">
                 <i class="fa fa-lg fa-fw fa-pen"></i>
             </a>';
@@ -26,7 +26,7 @@ class PostController extends Controller
                 $data->title,
                 $data->user->email,
                 $data->status,
-                $data->created_at,
+                $data->created_at->format('d/m/Y h:s'),
                 $btnEdit.$btnDelete,
             ];
             return $arr_data;

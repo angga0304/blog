@@ -14,7 +14,7 @@
                         <div class="p-6 text-gray-900 dark:text-gray-100">
                             {{ $post->title }}
                         </div>
-                        <div class="p-6 text-gray-900 dark:text-gray-100 text-right">
+                        <div class="p-6 text-gray-900 dark:text-gray-100 text-right" style="text-align: right; font-size: 10px;">
                             {{ $post->user->name }}
                         </div>
                     </div>

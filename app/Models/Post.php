@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Tag;
 use App\Models\User;
+use App\Models\Comment;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 
@@ -35,6 +36,14 @@ class Post extends Model
 
     public function user() {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function comments() {
+        return $this->hasMany(Comment::class, 'post_id');
+    }
+
+    public function getListcommentAttribute() {
+        return $this->comments()->whereNull('comment_id')->get();
     }
 
     public function getStatusAttribute() {

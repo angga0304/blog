@@ -13,7 +13,7 @@
             'Judul',
             'Penulis',
             'Status',
-            ['label' => 'Published', 'no-export' => false, 'width' => 5],
+            ['label' => 'Published', 'no-export' => false, 'width' => 15],
             ['label' => 'Actions', 'no-export' => true, 'width' => 15],
         ];
 
