@@ -13,7 +13,7 @@ class HomeController extends Controller
         if(!empty($param['search'])) {
             $postsQuery->where('title', 'LIKE', '%'.$param['search'].'%');
         }
-        if($param['order'] == 'oldest') {
+        if(!empty($param) && $param['order'] == 'oldest') {
             $postsQuery->orderBy('created_at', 'asc');
         }
         else {
