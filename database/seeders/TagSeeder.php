@@ -12,6 +12,20 @@ class TagSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        \App\Models\Tag::factory()->create([
+            'name' => 'News',
+        ]);
+        \App\Models\Tag::factory()->create([
+            'name' => 'Entertaintment',
+        ]);
+        \App\Models\Tag::factory()->create([
+            'name' => 'Funny',
+        ]);
+        \App\Models\Tag::factory()->create([
+            'name' => 'Animal',
+        ]);
+        \App\Models\Tag::factory()->create([
+            'name' => 'Crime',
+        ]);
     }
 }
