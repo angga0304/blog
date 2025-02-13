@@ -2,7 +2,7 @@
 
 @section('title', 'List Jadwal')
 @section('content_header')
-    <h1>{{ 'List Tag' }}</h1>
+    <h1>{{ 'List Post' }}</h1>
 @stop
 
 @section('content')

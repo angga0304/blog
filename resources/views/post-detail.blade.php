@@ -42,14 +42,14 @@
                     <div id="accordion-collapse" data-accordion="collapse">
                     @if($comment->replies->count())
                         <div class="p-6 text-gray-900 dark:text-gray-100">
-                            <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3" data-accordion-target="#accordion-collapse-body-{{ $key }}" aria-expanded="true" aria-controls="accordion-collapse-body-{{ $key }}">
+                            <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3" onclick="accordion(this)" data-accordion-target="accordion-collapse-body-{{ $key }}" aria-expanded="true" aria-controls="accordion-collapse-body-{{ $key }}">
                                 <span>Replies({{ $comment->replies->count() }})</span>
                                 <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
                                 </svg>
                             </button>
                         </div>
-                        <div id="accordion-collapse-body-{{ $key }}" class="" aria-labelledby="accordion-collapse-heading-{{ $key }}">
+                        <div id="accordion-collapse-body-{{ $key }}" class="hidden" aria-labelledby="accordion-collapse-heading-{{ $key }}">
                         @foreach($comment->replies as $reply)
                         <div class="p-4 text-gray-900 dark:text-gray-100 bg-gray-200 border m-4">
                             <div class="p-6 text-gray-900 dark:text-gray-100">
@@ -145,10 +145,9 @@
     @endif
 </x-app-layout>
 <script>
-    function reply(that) {
-        console.log(that.dataset);
-        document.getElementById("cid").value = that.dataset.cid;
-        document.getElementById("body").focus();
+    function accordion(that) {
+        element = document.getElementById(that.dataset.accordionTarget);
+        element.classList.toggle('hidden');
 
     }
 </script>

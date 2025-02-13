@@ -26,7 +26,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/', function () {
         return view('home');
-    });
+    })->name('admin.home');
 
     Route::prefix('tag')->middleware(['web', 'auth'])->group(function () {
         Route::get('/', [TagController::class, 'index'])->name('tag.index');

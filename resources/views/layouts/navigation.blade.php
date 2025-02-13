@@ -15,6 +15,11 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    @if(Auth::user())
+                        <x-nav-link :href="route('admin.home')" :active="request()->routeIs('admin.home')">
+                            {{ __('Admin') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -75,6 +80,13 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
         </div>
+        @if(Auth::user())
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link :href="route('admin.home')" :active="request()->routeIs('admin.home')">
+                    {{ __('Admin') }}
+                </x-responsive-nav-link>
+            </div>
+        @endif
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">

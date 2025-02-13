@@ -15,7 +15,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::where('user_id', Auth::id())->get()->map(function ($data) {
+        $postQuery = Auth::id() == 1 ? Post::orderBy('created_at') : Post::where('user_id', Auth::id());
+        $posts = $postQuery->get()->map(function ($data) {
             $btnEdit = '<a class="btn btn-xs btn-default text-primary mx-1 shadow" href="'. route('post.edit',$data->id) .'" title="Edit">
                 <i class="fa fa-lg fa-fw fa-pen"></i>
             </a>';
@@ -92,6 +93,11 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        // dd($post->comments->count());
+        foreach($post->comments as $comment) {
+            $comment->replies()->delete();
+        }
+        $post->comments()->delete();
         $post->delete();
         flash()->warning('post deleted');
         return redirect()->route('post.index');
