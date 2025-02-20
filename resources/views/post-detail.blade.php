@@ -7,6 +7,13 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            @if(!empty($post->image))
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900 dark:text-gray-100 flex flex-row min-h-screen justify-center items-center">
+                    <img width="800" height="auto" src='{{ asset($post->image->original_name) }}' alt="{{ $post->title }}">
+                </div>
+            </div>
+            @endif
 
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
@@ -148,6 +155,5 @@
     function accordion(that) {
         element = document.getElementById(that.dataset.accordionTarget);
         element.classList.toggle('hidden');
-
     }
 </script>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\Tag;
+use App\Models\File;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use Illuminate\Support\Facades\Auth;
@@ -52,6 +53,18 @@ class PostController extends Controller
         $param = $request->all();
         $param['user_id'] = Auth::id();
         $param['active'] = $param['active']?? FALSE;
+
+        $file = $request->file('file_id');
+        $fileName = $file->hashName();
+        $request->file_id->move(public_path('images'), $fileName);
+
+        $fid = File::create([
+            'original_name' => 'images/'.$fileName,
+            'generated_name' => $fileName
+        ]);
+
+        $param['file_id'] = $fid->id;
+
         Post::create($param);
 
         flash()->success('schedules registered');
@@ -82,6 +95,20 @@ class PostController extends Controller
     {
         $param = $request->all();
         $param['active'] = $param['active']?? FALSE;
+        // dd($param->file_id);
+        if(!empty($request->file_id)) {
+            $file = $request->file('file_id');
+            $fileName = $file->hashName();
+            $request->file_id->move(public_path('images'), $fileName);
+
+            $fid = File::create([
+                'original_name' => 'images/'.$fileName,
+                'generated_name' => $fileName
+            ]);
+            // dd($fid->id);
+            $param['file_id'] = $fid->id;
+        }
+
         $post->update($param);
 
         flash()->success('post updated');

@@ -7,10 +7,23 @@
 
 @section('content')
 @include('flash::message')
-    {{ html()->form('POST', route('post.updates', $post->id))->class('form-horizontal')->id('form-question')->open() }}
+    {{ html()->form('POST', route('post.updates', $post->id))->acceptsFiles()->class('form-horizontal')->id('form-question')->open() }}
         <div class="row">
             <div class="form-group">
                 {{ html()->label($post->slug) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                {{ html()->label('Image', 'file_id') }}
+                <br>
+                @if($post->image)
+                    <img width="360" height="auto" src='{{ asset($post->image->original_name) }}' alt="{{ $post->title }}">
+                @endif
+                <input type="file" class="form-control @error('file_id') is-invalid @enderror" name="file_id">
+                @if( $errors->has('file_id') )
+                    <span class="text-danger tooltip-field"><span>{{ $errors->first('file_id') }}</span>
+                @endif
             </div>
         </div>
         <div class="row">

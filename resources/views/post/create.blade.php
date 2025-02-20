@@ -7,7 +7,7 @@
 
 @section('content')
 @include('flash::message')
-    {{ html()->form('POST', route('post.stores'))->class('form-horizontal')->id('form-question')->open() }}
+    {{ html()->form('POST', route('post.stores'))->acceptsFiles()->class('form-horizontal')->id('form-question')->open() }}
         <div class="row">
             <div class="form-group">
                 {{ html()->label('Judul Berita', 'title') }}
@@ -15,6 +15,12 @@
                 @if( $errors->has('title') )
                     <span class="text-danger tooltip-field"><span>{{ $errors->first('title') }}</span>
                 @endif
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                {{ html()->label('Image', 'file_id') }}
+                <input type="file" class="form-control @error('file_id') is-invalid @enderror" name="file_id">
             </div>
         </div>
         <div class="row">

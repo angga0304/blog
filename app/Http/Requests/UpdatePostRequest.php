@@ -24,6 +24,7 @@ class UpdatePostRequest extends FormRequest
         return [
             'title' => 'required',
             'body' => 'required',
+            'file_id' => 'mimes:jpg,jpeg,gif|max:2048'
         ];
     }
 }
